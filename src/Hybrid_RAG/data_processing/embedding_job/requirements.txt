@@ -1,0 +1,18 @@
+# Forziamo versioni recenti di pandas/pyarrow per il bug 'append'
+pandas>=2.3.0
+pyarrow>=20.0.0
+
+# FORZIAMO L'INTERA STACK AI
+# Questo installerà l'ultima versione di torch, torchvision, 
+# transformers, e sentence-transformers, assicurando che siano 
+# TUTTI compatibili tra loro.
+torch
+torchvision
+transformers
+sentence-transformers
+
+# Le altre
+langchain
+langchain-text-splitters
+tqdm
+python-dotenv
