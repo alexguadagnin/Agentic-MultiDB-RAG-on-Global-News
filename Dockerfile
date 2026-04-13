@@ -6,11 +6,9 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copia PRIMA solo i requirements (per sfruttare la cache di Docker)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia il resto del codice (Docker ignorerà la cartella 'data' grazie al file .dockerignore)
 COPY . .
 
 ENV PYTHONPATH=/app/src
