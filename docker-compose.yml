@@ -85,7 +85,6 @@ services:
       # --- MEMORY SETTINGS (SAFE MODE) ---
       # Impostazioni conservative per evitare crash del sistema durante lo sviluppo.
       # Sostituiscono quelle da 8GB/12GB che avevi prima.
-      # Se hai una workstation con 64GB RAM, puoi ripristinare i valori alti.
       - NEO4J_server_memory_heap_initial__size=1G
       - NEO4J_server_memory_heap_max__size=2G
       - NEO4J_server_memory_pagecache_size=1G
@@ -155,8 +154,6 @@ services:
         condition: service_healthy
       neo4j-db:
         condition: service_healthy
-      # Qdrant a volte non ha healthcheck nativo affidabile in tutte le versioni, 
-      # quindi usiamo service_started per sicurezza o service_healthy se passa il test
       qdrant-db:
         #condition: service_healthy 
         condition: service_started
@@ -171,9 +168,8 @@ services:
     container_name: gdelt_neo4j_test
     ports:
       - "7475:7474" # Porta HTTP diversa (7475 invece di 7474)
-      - "7688:7687" # Porta Bolt diversa (7688 invece di 7687) !!! IMPORTANTE
+      - "7688:7687" # Porta Bolt diversa (7688 invece di 7687) 
     volumes:
-      # USIAMO UN VOLUME DIVERSO! I tuoi dati originali sono salvi in neo4j_data
       - neo4j_test_data:/data 
       - ./data:/import
     environment:
@@ -185,7 +181,7 @@ services:
       - NEO4J_server_memory_heap_initial__size=4G
       - NEO4J_server_memory_heap_max__size=12G
       - NEO4J_server_memory_pagecache_size=4G
-      - NEO4J_dbms_memory_transaction_total_max=0 # 0 significa illimitato (usa tutta la heap disponibile)
+      - NEO4J_dbms_memory_transaction_total_max=0 
     networks:
       - rag_network
 
